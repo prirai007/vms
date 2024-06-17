@@ -1,9 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controllers/adminController');
-const authMiddleware = require('../middleware/authMiddleware');
+const authMiddleware = require('../middlewares/authMiddleware');
 
-// Define admin routes
 router.get('/votes', authMiddleware.verifyAdmin, adminController.getAllVotes);
 router.get('/vote-count', authMiddleware.verifyAdmin, adminController.getVoteCount);
 router.post('/publish', authMiddleware.verifyAdmin, adminController.publishResults);

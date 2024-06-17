@@ -1,7 +1,6 @@
 const { Pool } = require('pg');
 require('dotenv').config();
 
-// Create a new pool instance
 const pool = new Pool({
     user: process.env.DB_USER,
     host: process.env.DB_HOST,
@@ -12,10 +11,8 @@ const pool = new Pool({
 
 const seedDatabase = async () => {
     try {
-        // Connect to the database
+        // Connecting to database
         await pool.connect();
-
-        // Insert initial users
         await pool.query(`
             INSERT INTO users (email, password, role)
             VALUES 
@@ -24,7 +21,6 @@ const seedDatabase = async () => {
             ON CONFLICT (email) DO NOTHING;
         `);
 
-        // Insert initial candidates
         await pool.query(`
             INSERT INTO candidates (name, party)
             VALUES 
@@ -37,7 +33,6 @@ const seedDatabase = async () => {
     } catch (error) {
         console.error('Error seeding database:', error);
     } finally {
-        // End the pool connection
         await pool.end();
     }
 };

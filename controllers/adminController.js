@@ -20,7 +20,7 @@ exports.getVoteCount = async (req, res) => {
 
 exports.publishResults = async (req, res) => {
     try {
-        // Logic to publish results
+        //publish result
         res.json({ message: 'Results published successfully' });
     } catch (err) {
         res.status(500).json({ error: err.message });
